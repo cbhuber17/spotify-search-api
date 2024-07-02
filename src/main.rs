@@ -25,6 +25,7 @@ struct Album {
 struct Track {
     name: String,
     href: String,
+    album: Album,
     popularity: u32,
     external_urls: ExternalUrls,
 }
@@ -39,7 +40,23 @@ struct APIResponse {
     tracks: Items<Track>,
 }
 
-fn print_tracks(tracks: Vec<&Track>) {}
+fn print_tracks(tracks: Vec<&Track>) {
+    for track in tracks {
+        println!("{}", track.name);
+        println!("{}", track.album.name);
+        println!(
+            "{}",
+            track
+                .album
+                .artists
+                .iter()
+                .map(|artist| artist.name.to_string())
+                .collect::<String>()
+        );
+        println!("{}", track.external_urls.spotify);
+        println!("-----------")
+    }
+}
 
 #[tokio::main]
 async fn main() {
