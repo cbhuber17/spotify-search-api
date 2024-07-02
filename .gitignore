@@ -1,1 +1,4 @@
 /target
+token.txt
+.env
+token_env/
